@@ -16,6 +16,8 @@
 		448476762C2FFAC000AA312B /* ETMusicPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448476752C2FFAC000AA312B /* ETMusicPlayerTests.swift */; };
 		448476802C2FFAC000AA312B /* ETMusicPlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4484767F2C2FFAC000AA312B /* ETMusicPlayerUITests.swift */; };
 		448476822C2FFAC000AA312B /* ETMusicPlayerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448476812C2FFAC000AA312B /* ETMusicPlayerUITestsLaunchTests.swift */; };
+		4484768F2C30044800AA312B /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4484768E2C30044800AA312B /* MusicManager.swift */; };
+		448476912C3004BB00AA312B /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448476902C3004BB00AA312B /* Music.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		4484767B2C2FFAC000AA312B /* ETMusicPlayerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ETMusicPlayerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4484767F2C2FFAC000AA312B /* ETMusicPlayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETMusicPlayerUITests.swift; sourceTree = "<group>"; };
 		448476812C2FFAC000AA312B /* ETMusicPlayerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETMusicPlayerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4484768E2C30044800AA312B /* MusicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
+		448476902C3004BB00AA312B /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,8 @@
 				4484765E2C2FFABD00AA312B /* AppDelegate.swift */,
 				448476602C2FFABD00AA312B /* SceneDelegate.swift */,
 				448476622C2FFABD00AA312B /* ViewController.swift */,
+				4484768E2C30044800AA312B /* MusicManager.swift */,
+				448476902C3004BB00AA312B /* Music.swift */,
 				448476642C2FFABD00AA312B /* Main.storyboard */,
 				448476672C2FFABF00AA312B /* Assets.xcassets */,
 				448476692C2FFABF00AA312B /* LaunchScreen.storyboard */,
@@ -259,6 +265,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				448476632C2FFABD00AA312B /* ViewController.swift in Sources */,
+				4484768F2C30044800AA312B /* MusicManager.swift in Sources */,
+				448476912C3004BB00AA312B /* Music.swift in Sources */,
 				4484765F2C2FFABD00AA312B /* AppDelegate.swift in Sources */,
 				448476612C2FFABD00AA312B /* SceneDelegate.swift in Sources */,
 			);
