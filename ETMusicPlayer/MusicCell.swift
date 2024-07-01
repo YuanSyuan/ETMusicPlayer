@@ -13,7 +13,7 @@ class MusicCell: UITableViewCell {
     let trackNameLabel = UILabel()
     let trackTimeLabel = UILabel()
     let artworkImageView = UIImageView()
-    let longDescriptionLabel = UILabel()
+    let playBtn = UIButton()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -40,23 +40,24 @@ class MusicCell: UITableViewCell {
         artworkImageView.clipsToBounds = true
         contentView.addSubview(artworkImageView)
 
-        // Configure longDescriptionLabel
-        longDescriptionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        longDescriptionLabel.numberOfLines = 0
-        contentView.addSubview(longDescriptionLabel)
+        // Configure playButton
+        playBtn.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        playBtn.isHidden = true
+        contentView.addSubview(playBtn)
     }
 
     func setupConstraints() {
         trackNameLabel.translatesAutoresizingMaskIntoConstraints = false
         trackTimeLabel.translatesAutoresizingMaskIntoConstraints = false
         artworkImageView.translatesAutoresizingMaskIntoConstraints = false
-        longDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        playBtn.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             artworkImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             artworkImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             artworkImageView.widthAnchor.constraint(equalToConstant: 60),
             artworkImageView.heightAnchor.constraint(equalToConstant: 60),
+            artworkImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
 
             trackNameLabel.leadingAnchor.constraint(equalTo: artworkImageView.trailingAnchor, constant: 16),
             trackNameLabel.trailingAnchor.constraint(equalTo: trackTimeLabel.leadingAnchor, constant: -8),
@@ -65,10 +66,9 @@ class MusicCell: UITableViewCell {
             trackTimeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             trackTimeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
 
-            longDescriptionLabel.leadingAnchor.constraint(equalTo: artworkImageView.trailingAnchor, constant: 16),
-            longDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            longDescriptionLabel.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor, constant: 8),
-            longDescriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            playBtn.leadingAnchor.constraint(equalTo: artworkImageView.trailingAnchor, constant: 16),
+            playBtn.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor, constant: 8),
+            playBtn.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
 

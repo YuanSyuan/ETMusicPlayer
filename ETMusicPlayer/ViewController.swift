@@ -24,7 +24,10 @@ class ViewController: UIViewController, UISearchBarDelegate, ArtistSearchResultV
     
     // Constraints
     private var artistResultViewTopConstraint: NSLayoutConstraint?
-    private var artistResultViewHiddenConstraint: NSLayoutConstraint?
+    
+    var currentlyPlayingIndex: Int?
+    var previouslyPlayingIndex: Int?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -212,24 +215,54 @@ extension ViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MusicCell", for: indexPath) as! MusicCell
         let song = songs[indexPath.row]
         cell.configure(with: song)
+        cell.playBtn.isHidden = indexPath.row != currentlyPlayingIndex
         return cell
     }
 }
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as? MusicCell
-        playSong(at: indexPath.row)
-    }
+            guard let cell = tableView.cellForRow(at: indexPath) as? MusicCell else { return }
+            previouslyPlayingIndex = currentlyPlayingIndex
+            currentlyPlayingIndex = indexPath.row
+            
+            // Reload the previously playing cell to hide its play button
+        if previouslyPlayingIndex != currentlyPlayingIndex {
+            if let previousIndex = previouslyPlayingIndex {
+                tableView.reloadRows(at: [IndexPath(row: previousIndex, section: 0)], with: .none)
+            }
+        }
+            
+            // Reload the current cell to show the play button
+//            tableView.reloadRows(at: [indexPath], with: .none)
+            
+            togglePlayPause(for: cell, at: indexPath.row)
+        }
 
-    private func playSong(at index: Int) {
-        player?.pause()
-        playerItem = AVPlayerItem(url: songs[index].previewUrl)
-        player?.replaceCurrentItem(with: playerItem)
-        player?.play()
+    
+    private func togglePlayPause(for cell: UITableViewCell, at index: Int) {
+        guard let musicCell = cell as? MusicCell else { return }
+        musicCell.playBtn.isHidden = false
+        if previouslyPlayingIndex == currentlyPlayingIndex {
+            if player?.timeControlStatus == .paused {
+                playerItem = AVPlayerItem(url: songs[index].previewUrl)
+                player?.replaceCurrentItem(with: playerItem)
+                player?.play()
+                musicCell.playBtn.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            } else {
+                player?.pause()
+                musicCell.playBtn.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            }
+            
+        } else {
+            playerItem = AVPlayerItem(url: songs[index].previewUrl)
+            player?.replaceCurrentItem(with: playerItem)
+            player?.play()
+            musicCell.playBtn.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        }
     }
 }
