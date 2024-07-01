@@ -145,15 +145,38 @@ class ViewController: UIViewController, UISearchBarDelegate, ArtistSearchResultV
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchArtists(query: searchText)
-    }
-
-    func searchArtists(query: String) {
-            let artists = mockSearchArtists(query: query)
-            artistResultView.updateArtists(artists)
-            artistResultView.isHidden = artists.isEmpty
-            updateArtistResultViewVisibility(show: !artists.isEmpty)
+        if searchText.isEmpty {
+            songs = []
+            tableView.reloadData()
+            artistResultView.updateArtists([])
+            artistResultView.artistTableView.reloadData()
+        } else {
+//            searchArtists(query: searchText)
+            lookupArtist(by: searchText)
         }
+    }
+    
+    func lookupArtist(by searchText: String) {
+        musicManager.lookupArtist(by: searchText) { [weak self] result in
+                   DispatchQueue.main.async {
+                       switch result {
+                       case .success(let artists):
+                           self?.artistResultView.updateArtists(artists)
+                           self?.artistResultView.isHidden = artists.isEmpty
+                           self?.updateArtistResultViewVisibility(show: !artists.isEmpty)
+                       case .failure(let error):
+                           print("Error fetching artists: \(error)")
+                       }
+                   }
+               }
+        }
+//
+//    func searchArtists(query: String) {
+//            let artists = mockSearchArtists(query: query)
+//            artistResultView.updateArtists(artists)
+//            artistResultView.isHidden = artists.isEmpty
+//            updateArtistResultViewVisibility(show: !artists.isEmpty)
+//        }
 
         func updateArtistResultViewVisibility(show: Bool) {
             if show {
@@ -174,7 +197,7 @@ class ViewController: UIViewController, UISearchBarDelegate, ArtistSearchResultV
 
     func didSelectArtist(_ artist: String) {
         searchBar.text = artist
-        artistResultView.updateArtists([])
+//        artistResultView.updateArtists([])
         updateArtistResultViewVisibility(show: false)
     }
     

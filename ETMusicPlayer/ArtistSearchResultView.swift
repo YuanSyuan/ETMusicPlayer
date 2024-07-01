@@ -13,8 +13,8 @@ protocol ArtistSearchResultViewDelegate: AnyObject {
 
 class ArtistSearchResultView: UIView, UITableViewDelegate, UITableViewDataSource {
     
-    private let artistTableView = UITableView()
-    private var artists: [String] = []
+    let artistTableView = UITableView()
+    private var artists: [Artist] = []
     weak var delegate: ArtistSearchResultViewDelegate?
     
     override init(frame: CGRect) {
@@ -49,7 +49,7 @@ class ArtistSearchResultView: UIView, UITableViewDelegate, UITableViewDataSource
         ])
     }
     
-    func updateArtists(_ artists: [String]) {
+    func updateArtists(_ artists: [Artist]) {
         self.artists = artists
         artistTableView.reloadData()
     }
@@ -61,13 +61,13 @@ class ArtistSearchResultView: UIView, UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArtistCell", for: indexPath)
-        cell.textLabel?.text = artists[indexPath.row]
+        cell.textLabel?.text = artists[indexPath.row].artistName
         return cell
     }
 
     // UITableViewDelegate methods
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedArtist = artists[indexPath.row]
+        let selectedArtist = artists[indexPath.row].artistName
         delegate?.didSelectArtist(selectedArtist)
     }
 }

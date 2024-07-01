@@ -21,6 +21,7 @@
 		448476932C3262AD00AA312B /* MusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448476922C3262AD00AA312B /* MusicCell.swift */; };
 		448476952C327B7D00AA312B /* ArtistSearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448476942C327B7D00AA312B /* ArtistSearchResultView.swift */; };
 		448476972C327D4300AA312B /* ArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448476962C327D4300AA312B /* ArtistCell.swift */; };
+		448476992C3292E400AA312B /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448476982C3292E400AA312B /* Artist.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		448476922C3262AD00AA312B /* MusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCell.swift; sourceTree = "<group>"; };
 		448476942C327B7D00AA312B /* ArtistSearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSearchResultView.swift; sourceTree = "<group>"; };
 		448476962C327D4300AA312B /* ArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCell.swift; sourceTree = "<group>"; };
+		448476982C3292E400AA312B /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				448476922C3262AD00AA312B /* MusicCell.swift */,
 				4484768E2C30044800AA312B /* MusicManager.swift */,
 				448476902C3004BB00AA312B /* Music.swift */,
+				448476982C3292E400AA312B /* Artist.swift */,
 				448476642C2FFABD00AA312B /* Main.storyboard */,
 				448476672C2FFABF00AA312B /* Assets.xcassets */,
 				448476692C2FFABF00AA312B /* LaunchScreen.storyboard */,
@@ -276,6 +279,7 @@
 				448476632C2FFABD00AA312B /* ViewController.swift in Sources */,
 				4484768F2C30044800AA312B /* MusicManager.swift in Sources */,
 				448476972C327D4300AA312B /* ArtistCell.swift in Sources */,
+				448476992C3292E400AA312B /* Artist.swift in Sources */,
 				448476912C3004BB00AA312B /* Music.swift in Sources */,
 				4484765F2C2FFABD00AA312B /* AppDelegate.swift in Sources */,
 				448476612C2FFABD00AA312B /* SceneDelegate.swift in Sources */,

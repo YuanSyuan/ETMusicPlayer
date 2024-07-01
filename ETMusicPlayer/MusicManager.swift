@@ -9,10 +9,38 @@ import Foundation
 
 class MusicManager {
     
-    var songs: [StoreItem] = []
+    func lookupArtist(by searchText: String, completion: @escaping (Result<[Artist], Error>) -> Void) {
+           let urlString = "https://itunes.apple.com/search?term=\(searchText)&entity=musicArtist"
+           guard let url = URL(string: urlString) else {
+               completion(.failure(NSError(domain: "Invalid URL", code: -1, userInfo: nil)))
+               return
+           }
+
+           let task = URLSession.shared.dataTask(with: url) { data, response, error in
+               if let error = error {
+                   completion(.failure(error))
+                   return
+               }
+
+               guard let data = data else {
+                   completion(.failure(NSError(domain: "No data", code: -1, userInfo: nil)))
+                   return
+               }
+
+               do {
+                   let result = try JSONDecoder().decode(ArtistSearchResponse.self, from: data)
+                   let artists = result.results
+                   completion(.success(artists))
+               } catch {
+                   completion(.failure(error))
+               }
+           }
+
+           task.resume()
+       }
+
     
     func getAPIData(for artist: String, completion: @escaping (Result<[StoreItem], Error>) -> Void) {
-            
         //可以查中文歌手
         guard let encodeUrlString = artist.addingPercentEncoding(withAllowedCharacters:
                 .urlQueryAllowed) else {
