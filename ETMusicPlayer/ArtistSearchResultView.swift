@@ -29,8 +29,6 @@ class ArtistSearchResultView: UIView, UITableViewDelegate, UITableViewDataSource
     
     private func setupUI() {
         self.backgroundColor = .white
-        self.layer.borderColor = UIColor.lightGray.cgColor
-        self.layer.borderWidth = 1.0
         
         artistTableView.delegate = self
         artistTableView.dataSource = self
