@@ -19,6 +19,8 @@
 		4484768F2C30044800AA312B /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4484768E2C30044800AA312B /* MusicManager.swift */; };
 		448476912C3004BB00AA312B /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448476902C3004BB00AA312B /* Music.swift */; };
 		448476932C3262AD00AA312B /* MusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448476922C3262AD00AA312B /* MusicCell.swift */; };
+		448476952C327B7D00AA312B /* ArtistSearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448476942C327B7D00AA312B /* ArtistSearchResultView.swift */; };
+		448476972C327D4300AA312B /* ArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448476962C327D4300AA312B /* ArtistCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		4484768E2C30044800AA312B /* MusicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		448476902C3004BB00AA312B /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		448476922C3262AD00AA312B /* MusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCell.swift; sourceTree = "<group>"; };
+		448476942C327B7D00AA312B /* ArtistSearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSearchResultView.swift; sourceTree = "<group>"; };
+		448476962C327D4300AA312B /* ArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,8 @@
 				4484765E2C2FFABD00AA312B /* AppDelegate.swift */,
 				448476602C2FFABD00AA312B /* SceneDelegate.swift */,
 				448476622C2FFABD00AA312B /* ViewController.swift */,
+				448476942C327B7D00AA312B /* ArtistSearchResultView.swift */,
+				448476962C327D4300AA312B /* ArtistCell.swift */,
 				448476922C3262AD00AA312B /* MusicCell.swift */,
 				4484768E2C30044800AA312B /* MusicManager.swift */,
 				448476902C3004BB00AA312B /* Music.swift */,
@@ -269,9 +275,11 @@
 			files = (
 				448476632C2FFABD00AA312B /* ViewController.swift in Sources */,
 				4484768F2C30044800AA312B /* MusicManager.swift in Sources */,
+				448476972C327D4300AA312B /* ArtistCell.swift in Sources */,
 				448476912C3004BB00AA312B /* Music.swift in Sources */,
 				4484765F2C2FFABD00AA312B /* AppDelegate.swift in Sources */,
 				448476612C2FFABD00AA312B /* SceneDelegate.swift in Sources */,
+				448476952C327B7D00AA312B /* ArtistSearchResultView.swift in Sources */,
 				448476932C3262AD00AA312B /* MusicCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

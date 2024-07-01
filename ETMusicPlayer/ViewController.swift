@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, UISearchBarDelegate {
+class ViewController: UIViewController, UISearchBarDelegate, ArtistSearchResultViewDelegate {
     
     let musicManager = MusicManager()
     var songs: [StoreItem] = []
@@ -18,97 +18,121 @@ class ViewController: UIViewController, UISearchBarDelegate {
     let searchBar = UISearchBar()
     let searchButton = UIButton(type: .system)
     let tableView = UITableView()
+    let artistResultView = ArtistSearchResultView()
     private var player: AVPlayer?
     private var playerItem: AVPlayerItem?
     
+    // Constraints
+    private var artistResultViewTopConstraint: NSLayoutConstraint?
+    private var artistResultViewHiddenConstraint: NSLayoutConstraint?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        //TO-DO 改成輸入框文字帶入搜尋
-        musicManager.getAPIData(for: "jason mars") { [weak self] result in
+        // Setup view background color
+        view.backgroundColor = .white
+        
+        // Setup UI elements
+        setupUI()
+        
+        // Setup constraints
+        setupConstraints()
+        
+        // Setup audio session
+        setupAudioSession()
+        
+        // Set delegate for artistResultView
+        artistResultView.delegate = self
+        artistResultView.isHidden = true
+    }
+    
+    func setupUI() {
+        // Configure titleLabel
+        titleLabel.text = "Search Music"
+        titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        titleLabel.textAlignment = .center
+        view.addSubview(titleLabel)
+
+        // Configure searchBar
+        searchBar.delegate = self
+        view.addSubview(searchBar)
+
+        // Configure searchButton
+        searchButton.setTitle("Search", for: .normal)
+        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+        view.addSubview(searchButton)
+
+        // Configure tableView
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(MusicCell.self, forCellReuseIdentifier: "MusicCell")
+        view.addSubview(tableView)
+        
+        
+        // Add artistResultView
+        view.addSubview(artistResultView)
+    }
+
+    func setupConstraints() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchButton.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        artistResultView.translatesAutoresizingMaskIntoConstraints = false
+
+        artistResultViewTopConstraint = artistResultView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8)
+//        artistResultViewHiddenConstraint = artistResultView.bottomAnchor.constraint(equalTo: view.topAnchor)
+
+        NSLayoutConstraint.activate([
+            // Constraints for titleLabel
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+
+            // Constraints for searchBar
+            searchBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+
+            // Constraints for searchButton
+            searchButton.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 16),
+            searchButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+
+            // Constraints for artistResultView
+            artistResultView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            artistResultView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            artistResultView.heightAnchor.constraint(equalToConstant: 200),
+
+            // Constraints for tableView
+            tableView.topAnchor.constraint(equalTo: searchButton.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        // Initially hide the artistResultView
+        artistResultViewTopConstraint?.isActive = false
+    }
+
+    @objc func searchButtonTapped() {
+        guard let searchText = searchBar.text, !searchText.isEmpty else {
+            return
+        }
+        musicManager.getAPIData(for: searchText) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let fetchedSongs):
-                    self?.songs.append(contentsOf: fetchedSongs)
-                    print(self?.songs)
+                    self?.songs = fetchedSongs
+                    print(fetchedSongs)
                     self?.tableView.reloadData()
+                    
                 case .failure(let error):
                     print("Error fetching songs: \(error)")
                 }
             }
         }
-        
-        view.backgroundColor = .white
-        setupUI()
-        setupConstraints()
-        setupAudioSession()
     }
-    
-    func setupUI() {
-            // Configure titleLabel
-            titleLabel.text = "Search Music"
-            titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-            titleLabel.textAlignment = .center
-            view.addSubview(titleLabel)
-
-            // Configure searchBar
-            searchBar.delegate = self
-            view.addSubview(searchBar)
-
-            // Configure searchButton
-            searchButton.setTitle("Search", for: .normal)
-            searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
-            view.addSubview(searchButton)
-
-            // Configure tableView
-            tableView.delegate = self
-            tableView.dataSource = self
-        tableView.register(MusicCell.self, forCellReuseIdentifier: "MusicCell")
-            view.addSubview(tableView)
-        }
-
-        func setupConstraints() {
-            titleLabel.translatesAutoresizingMaskIntoConstraints = false
-            searchBar.translatesAutoresizingMaskIntoConstraints = false
-            searchButton.translatesAutoresizingMaskIntoConstraints = false
-            tableView.translatesAutoresizingMaskIntoConstraints = false
-
-            NSLayoutConstraint.activate([
-                titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-                titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-
-                searchBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
-                searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-
-                searchButton.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 16),
-                searchButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-
-                tableView.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 16),
-                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
-        }
-
-        @objc func searchButtonTapped() {
-            guard let searchText = searchBar.text, !searchText.isEmpty else {
-                return
-            }
-//            searchMusic(query: searchText)
-        }
-
-//        func searchMusic(query: String) {
-//            MusicManager.shared.searchMusic(query: query) { [weak self] results in
-//                DispatchQueue.main.async {
-//                    self?.searchResults = results
-//                    self?.tableView.reloadData()
-//                }
-//            }
-//        }
 
     func setupAudioSession() {
         do {
@@ -119,12 +143,44 @@ class ViewController: UIViewController, UISearchBarDelegate {
         }
         player = AVPlayer()
     }
-        
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchArtists(query: searchText)
+    }
+
+    func searchArtists(query: String) {
+            let artists = mockSearchArtists(query: query)
+            artistResultView.updateArtists(artists)
+            artistResultView.isHidden = artists.isEmpty
+            updateArtistResultViewVisibility(show: !artists.isEmpty)
+        }
+
+        func updateArtistResultViewVisibility(show: Bool) {
+            if show {
+                artistResultViewTopConstraint?.isActive = true
+            } else {
+                artistResultViewTopConstraint?.isActive = false
+                artistResultView.isHidden = true
+            }
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    
+    func mockSearchArtists(query: String) -> [String] {
+        let allArtists = ["Adele", "ABBA", "Ariana Grande", "AC/DC", "Alicia Keys"]
+        return allArtists.filter { $0.lowercased().hasPrefix(query.lowercased()) }
+    }
+
+    func didSelectArtist(_ artist: String) {
+        searchBar.text = artist
+        artistResultView.updateArtists([])
+        updateArtistResultViewVisibility(show: false)
+    }
     
 }
 
-// UITableViewDataSource methods
-extension ViewController: UITableViewDataSource{
+extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songs.count
     }
@@ -139,21 +195,18 @@ extension ViewController: UITableViewDataSource{
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        70
+        return 70
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     let cell = tableView.cellForRow(at: indexPath) as? MusicCell
-        
+        let cell = tableView.cellForRow(at: indexPath) as? MusicCell
         playSong(at: indexPath.row)
     }
-    
+
     private func playSong(at index: Int) {
         player?.pause()
         playerItem = AVPlayerItem(url: songs[index].previewUrl)
         player?.replaceCurrentItem(with: playerItem)
         player?.play()
-       
     }
 }
-
