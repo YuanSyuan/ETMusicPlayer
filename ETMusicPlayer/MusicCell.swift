@@ -74,12 +74,10 @@ class MusicCell: UITableViewCell {
 
     func configure(with song: StoreItem) {
         trackNameLabel.text = song.trackName
-//        trackTimeLabel.text = formattedTrackTime(song.trackTimeMillis)
+        trackTimeLabel.text = formattedTrackTime(song.trackTimeMillis)
 //        longDescriptionLabel.text = song.longDescription
-       
-            
-            artworkImageView.loadImage(from: song.artworkUrl100)
         
+            artworkImageView.loadImage(from: song.artworkUrl100)
     }
 
     private func formattedTrackTime(_ millis: Int) -> String {
