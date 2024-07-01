@@ -13,7 +13,13 @@ class MusicManager {
     
     func getAPIData(for artist: String, completion: @escaping (Result<[StoreItem], Error>) -> Void) {
             
-            let urlString: String = "https://itunes.apple.com/search?term=\(artist)&media=music&country=tw"
+        //可以查中文歌手
+        guard let encodeUrlString = artist.addingPercentEncoding(withAllowedCharacters:
+                .urlQueryAllowed) else {
+            return
+        }
+        
+            let urlString: String = "https://itunes.apple.com/search?term=\(encodeUrlString)&media=music&country=tw"
             
             if let url = URL(string: urlString) {
                 
