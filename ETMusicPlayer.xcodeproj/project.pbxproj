@@ -18,6 +18,7 @@
 		448476822C2FFAC000AA312B /* ETMusicPlayerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448476812C2FFAC000AA312B /* ETMusicPlayerUITestsLaunchTests.swift */; };
 		4484768F2C30044800AA312B /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4484768E2C30044800AA312B /* MusicManager.swift */; };
 		448476912C3004BB00AA312B /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448476902C3004BB00AA312B /* Music.swift */; };
+		448476932C3262AD00AA312B /* MusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448476922C3262AD00AA312B /* MusicCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		448476812C2FFAC000AA312B /* ETMusicPlayerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETMusicPlayerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4484768E2C30044800AA312B /* MusicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		448476902C3004BB00AA312B /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
+		448476922C3262AD00AA312B /* MusicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				4484765E2C2FFABD00AA312B /* AppDelegate.swift */,
 				448476602C2FFABD00AA312B /* SceneDelegate.swift */,
 				448476622C2FFABD00AA312B /* ViewController.swift */,
+				448476922C3262AD00AA312B /* MusicCell.swift */,
 				4484768E2C30044800AA312B /* MusicManager.swift */,
 				448476902C3004BB00AA312B /* Music.swift */,
 				448476642C2FFABD00AA312B /* Main.storyboard */,
@@ -269,6 +272,7 @@
 				448476912C3004BB00AA312B /* Music.swift in Sources */,
 				4484765F2C2FFABD00AA312B /* AppDelegate.swift in Sources */,
 				448476612C2FFABD00AA312B /* SceneDelegate.swift in Sources */,
+				448476932C3262AD00AA312B /* MusicCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,7 +380,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -433,7 +437,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -520,7 +524,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.yuansyuanli.ETMusicPlayerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuansyuan.ETMusicPlayerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -540,7 +544,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.yuansyuanli.ETMusicPlayerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuansyuan.ETMusicPlayerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;

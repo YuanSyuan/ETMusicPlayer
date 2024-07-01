@@ -19,7 +19,7 @@ class MusicManager {
             return
         }
         
-            let urlString: String = "https://itunes.apple.com/search?term=\(encodeUrlString)&media=music&country=tw"
+            let urlString: String = "https://itunes.apple.com/search?term=\(artist)&media=music&country=tw"
             
             if let url = URL(string: urlString) {
                 
